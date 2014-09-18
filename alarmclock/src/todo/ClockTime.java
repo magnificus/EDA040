@@ -25,24 +25,27 @@ public class ClockTime extends Thread {
 	}
 
 	public void run() {
-		sleepTime = 1000;
+		long t0;
 		while (true) {
-			systemTimeBeforeSleep = System.currentTimeMillis();
+			t0 = System.currentTimeMillis();
 			updateClock();
 			checkAlarm();
-			try {
-				sleep(sleepTime);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			t0 += 1000;
+			diff = t0 - System.currentTimeMillis();
+			if (diff > 0) {
+				try {
+					sleep(diff);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
-			diff = System.currentTimeMillis() - systemTimeBeforeSleep;
-			sleepTime = 2000 - diff;
 		}
 
 	}
 
 	private void checkAlarm() {
-		if (systemTime >= alarmTime && systemTime < alarmTime + 20000 && alarmEnabled) {
+		if (systemTime >= alarmTime && systemTime < alarmTime + 20000
+				&& alarmEnabled) {
 			output.doAlarm();
 		}
 
@@ -93,10 +96,11 @@ public class ClockTime extends Thread {
 	}
 
 	public void turnAlarmOff() {
-		if (systemTime >= alarmTime && systemTime < alarmTime + 20000 && alarmEnabled) {
+		if (systemTime >= alarmTime && systemTime < alarmTime + 20000
+				&& alarmEnabled) {
 			alarmTime = Integer.MAX_VALUE;
 		}
-		
+
 	}
 
 }

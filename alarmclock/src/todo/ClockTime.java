@@ -93,7 +93,7 @@ public class ClockTime extends Thread {
 	}
 
 	public void turnAlarmOff() {
-		if (outTime >= alarmTime && outTime < alarmTime + 20 && alarmEnabled) {
+		if (systemTime >= alarmTime && systemTime < alarmTime + 20000 && alarmEnabled) {
 			alarmTime = Integer.MAX_VALUE;
 		}
 		

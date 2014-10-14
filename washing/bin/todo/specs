@@ -1,0 +1,17 @@
+PeriodicThread (eller JThread): Kontrollenheter (temp, vatten, rotation)
+perform() ska ej innehålla långa loopar.
+RTThread: Tvättprogram, hantera användargenererad input samt interna händelser
+
+meddelanden mellan PeriodicThreads och WashingPrograms.
+
+vattentemp (10s samplingstid):
+slå av vid måltemp-1.2°
+slå på vid måltemp-1.6°
+
+centrifugering: 5 min
+
+tvättprogram skickar börvärde till tempkontroll
+om inget meddelande erhålles, använd gammalt
+om nytt värde != gammalt, anpassa
+
+
